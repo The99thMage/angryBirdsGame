@@ -26,21 +26,16 @@ var star1Y, start2Y, start3Y;
 var textCounter;
 
 var hour;
-
-var bg = "sprites/halloween.png";
 window.score;
 
 function preload(){
-    //backdrop = loadImage("sprites/bg.png");
+    backdrop = loadImage("sprites/bg.png");
     slingshotBit = loadImage("sprites/sling2.png");
     smoke = loadImage("sprites/smoke.png");
     overlay = loadImage("sprites/overlay.png")
     star1 = loadImage("sprites/star1.png")
     star2 = loadImage("sprites/star2.png")
     star3 = loadImage("sprites/star3.png")
-
-    //load in our background
-    getBackdropImg();
 }
 
 function setup(){
@@ -91,7 +86,7 @@ function setup(){
 }
 
 function draw(){
-    if(backdrop){background(backdrop);}
+    background(backdrop);
 
     if(gamestate === "playing"){
         Engine.update(engine);
@@ -237,19 +232,4 @@ function keyPressed(){
     if(keyCode === 32 && star1Y <= 200){
         window.location.reload();
     }
-}
-
-async function getBackdropImg(){
-    var response = await fetch("http://worldtimeapi.org/api/timezone/America/Los_Angeles");
-    var responseJson = await response.json();
-    var datetime = responseJson.datetime;
-    hour = datetime.slice(11,13);
-
-    if(hour >= 08 && hour <= 17){
-        bg = "sprites/bg.png";
-    }else{
-        bg = "sprites/halloween.png";
-    }
-
-    backdrop = loadImage(bg);
 }
